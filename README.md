@@ -15,10 +15,11 @@ Or
 ```bash
 cat domains.txt \
     | zdns ANY \
-    --name-servers <(curl -s https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.txt | tr '\n' ',' | sed 's/,$//'
-)
+    --name-servers <(curl -s https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.csv)
 ```
 
 Or whatever you want.
+
+Disclaimer: I know that the .csv file is not a "proper" csv, but it fits the zdns format :)
 
 Let's see if this works!
