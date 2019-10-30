@@ -19,7 +19,7 @@ Or
 ```bash
 cat domains.txt \
     | zdns ANY \
-    --name-servers <(curl -s https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.csv)
+    --name-servers <(curl -s https://raw.githubusercontent.com/BBerastegui/fresh-dns-servers/master/resolvers.csv | sed -e 's/,/:53,/g' | sed -e 's/$/:53/')
 ```
 
 Or whatever you want.
