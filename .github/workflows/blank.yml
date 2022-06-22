@@ -38,9 +38,9 @@ jobs:
           cd dnsvalidator
           python3 setup.py install
           cd ..
-          wget https://public-dns.info/nameservers.txt
-          wget https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
-          cat nameservers.txt resolvers.txt | sort -u >> ns_input.txt
+          wget -O public-dns_resolvers.txt https://public-dns.info/nameservers.txt
+          wget -O massdns_resolvers.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
+          cat public-dns_resolvers.txt massdns_resolvers.txt | sort -u -o ns_input.txt
           dnsvalidator -o /resolvers.txt \
             -threads 60 \
             -r example.com \
