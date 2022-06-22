@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '0 1 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.3' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          git clone https://github.com/vortexau/dnsvalidator.git
+          cd dnsvalidator
+          python3 setup.py install
+          cd ..
+          wget https://public-dns.info/nameservers.txt
+          wget https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
+          cat nameservers.txt resolvers.txt | sort -u >> ns_input.txt
+          /usr/local/bin/dnsvalidator -o /resolvers.txt \
+            -threads 60 \
+            -r example.com \
+            -tL ns_input.txt
+          cd $GITHUB_WORKSPACE
+          git config --global user.name "autoupdater"
+          git config --global user.email "autoupdater@localhost"
+          sed -i '/^$/d' /resolvers.txt
+          mv /resolvers.txt ./resolvers.txt
+          git add resolvers.txt
+          # Create a csv version
+          cat resolvers.txt | tr '\n' ',' | sed 's/,$//' > resolvers.csv
+          git add resolvers.*
+          git commit -m "$(date +%Y%m%d) update."
+          git push
