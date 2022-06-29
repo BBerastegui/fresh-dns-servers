@@ -42,7 +42,7 @@ jobs:
           wget -O massdns_resolvers.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
           cat public-dns_resolvers.txt massdns_resolvers.txt | sort -u -o ns_input.txt
           dnsvalidator -o /resolvers.txt \
-            -threads 60 \
+            -t 60 \
             -i ns_input.txt
           cd $GITHUB_WORKSPACE
           git config --global user.name "autoupdater"
