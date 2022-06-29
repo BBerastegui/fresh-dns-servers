@@ -41,14 +41,14 @@ jobs:
           wget -O public-dns_resolvers.txt https://public-dns.info/nameservers.txt
           wget -O massdns_resolvers.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
           cat public-dns_resolvers.txt massdns_resolvers.txt | sort -u -o ns_input.txt
-          dnsvalidator -o /resolvers.txt \
+          dnsvalidator -o /tmp/resolvers.txt \
             -t 60 \
             -i ns_input.txt
           cd $GITHUB_WORKSPACE
           git config --global user.name "autoupdater"
           git config --global user.email "autoupdater@localhost"
-          sed -i '/^$/d' /resolvers.txt
-          mv /resolvers.txt ./resolvers.txt
+          sed -i '/^$/d' /tmp/resolvers.txt
+          mv /tmp/resolvers.txt ./resolvers.txt
           git add resolvers.txt
           # Create a csv version
           cat resolvers.txt | tr '\n' ',' | sed 's/,$//' > resolvers.csv
