@@ -3,7 +3,7 @@
 I set up an scheduled task in Google Cloud that automatically launches ~https://github.com/teknogeek/fresh.py~ ~https://github.com/vortexau/dnsvalidator~ https://github.com/frost19k/DNSValidator.git on a Github action every 24h posts the updated resolvers.txt list to this repository.
 
 I'm currently pulling and running through dnsvalidator the following lists (open to add more :D):
-- https://public-dns.info/nameservers.txt
+- https://public-dns.info/nameservers-all.txt
 - https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
 
 So if nothing goes wrong, we are supposed to get a list of reliable DNS servers in this repo.
