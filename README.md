@@ -1,5 +1,7 @@
 # Automatically refreshed list of DNS resolvers
 
+Thanks to: [@covuworie](https://github.com/covuworie) for the feedback and improvement suggestions!
+
 I set up an scheduled task in Google Cloud that automatically launches ~https://github.com/teknogeek/fresh.py~ ~https://github.com/vortexau/dnsvalidator~ https://github.com/frost19k/DNSValidator.git on a Github action every 24h posts the updated resolvers.txt list to this repository.
 
 I'm currently pulling and running through dnsvalidator the following lists (open to add more :D):
