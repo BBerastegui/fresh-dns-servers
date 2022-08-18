@@ -38,7 +38,7 @@ jobs:
           cd DNSValidator/
           pip3 install .
           cd ..
-          wget -O public-dns_resolvers.txt https://public-dns.info/nameservers.txt
+          wget -O public-dns_resolvers.txt https://public-dns.info/nameservers-all.txt
           wget -O massdns_resolvers.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
           cat public-dns_resolvers.txt massdns_resolvers.txt | sort -u -o ns_input.txt
           dnsvalidator -o /tmp/resolvers.txt \
