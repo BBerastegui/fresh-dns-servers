@@ -36,7 +36,7 @@ jobs:
         run: |
           git clone https://github.com/frost19k/DNSValidator.git
           cd DNSValidator/
-          pip3 uninstall setuptools
+          pip3 uninstall -y setuptools
           pip3 install setuptools
           pip3 install .
           cd ..
