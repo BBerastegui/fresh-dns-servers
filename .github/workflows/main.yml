@@ -37,6 +37,7 @@ jobs:
           git clone https://github.com/frost19k/DNSValidator.git
           cd DNSValidator/
           pip3 install .
+          pip3 install --upgrade setuptools --user python
           cd ..
           wget -O public-dns_resolvers.txt https://public-dns.info/nameservers-all.txt
           wget -O massdns_resolvers.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
